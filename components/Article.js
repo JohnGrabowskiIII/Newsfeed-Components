@@ -126,14 +126,14 @@ const data = [
 
 // FUNCTION TO BUILD TITLE ELEMENTS
 function titleBuilder(title) {
-  let hTwo = document.createElement('h2');
+  const hTwo = document.createElement('h2');
   hTwo.textContent = title;
   return hTwo;
 }
 
 // FUNCTION TO BUILD DATE ELEMENTS
 function dateBuilder(date) {
-  let pDate = document.createElement('p');
+  const pDate = document.createElement('p');
   pDate.classList.add('date');
   pDate.textContent = date;
   return pDate;
@@ -141,14 +141,14 @@ function dateBuilder(date) {
 
 // FUNCTION TO BUILD PARAGRAPH ELEMENTS
 function paragraphBuilder(para) {
-  let paragraph = document.createElement('p');
+  const paragraph = document.createElement('p');
   paragraph.textContent = para;
   return paragraph;
 }
 
 // FUNCTION TO BUILD SPAN BUTTONS
 const spanExpand = () => {
-  let span = document.createElement('span');
+  const span = document.createElement('span');
   span.classList.add('expandButton');
   span.textContent = '+';
   span.addEventListener('click', e => {
@@ -163,7 +163,7 @@ function articleBuilder(articleObject) {
   const {title, date, firstParagraph, secondParagraph, thirdParagraph} = articleObject;
 
   // DECLARE CONTAINER DIV AND ADD CLASS
-  let artContainerDiv = document.createElement('div');
+  const artContainerDiv = document.createElement('div');
   artContainerDiv.classList.add('article');
 
   // CALL BUILDER FUNCTIONS AND APPEND RESULTS
