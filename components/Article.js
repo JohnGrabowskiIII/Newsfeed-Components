@@ -109,10 +109,10 @@ const data = [
 
     {three separate paragraph elements}
 
-    <span class="expandButton">+</span>
+    <spanBtn class="expandButton">+</spanBtn>
   </div>
 
-  Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
+  Step 2: Still inside `articleMaker`, add an event listener to the spanBtn.expandButton.
   This listener should toggle the class 'article-open' on div.article.
 
   Step 3: Don't forget to return something from your function!
@@ -123,6 +123,8 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+import anime from 'animejs/lib/anime.es';
 
 // FUNCTION TO BUILD TITLE ELEMENTS
 function titleBuilder(title) {
@@ -148,13 +150,15 @@ function paragraphBuilder(para) {
 
 // FUNCTION TO BUILD SPAN BUTTONS
 const spanExpand = () => {
-  const span = document.createElement('span');
-  span.classList.add('expandButton');
-  span.textContent = '+';
-  span.addEventListener('click', e => {
+  const spanBtn = document.createElement('span');
+  
+  spanBtn.classList.add('expandButton');
+  spanBtn.textContent = '+';
+  spanBtn.addEventListener('click', e => {
+    e.stopPropagation();
     e.target.parentNode.classList.toggle('article-open');
   })
-  return span;
+  return spanBtn;
 }
 
 function articleBuilder(articleObject) {
@@ -179,7 +183,7 @@ function articleBuilder(articleObject) {
 
 // FUNCTION LOOPS THROUGH ARTICLE ARRAY AND CALLS ARTICLEBUILDER AT EACH ITERATION
 function articleMaker(articleArray) {
-  const articleSection = document.querySelector('div.articles')
+  const articleSection = document.querySelector('div.articles');
   articleArray.forEach(cb => {
     articleSection.appendChild(articleBuilder(cb));
   })

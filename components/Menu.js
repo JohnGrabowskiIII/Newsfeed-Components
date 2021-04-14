@@ -76,7 +76,7 @@ function menuMaker(items) {
 
   // FUNCTION TO CREATE AND ADD LIST ITEMS
   items.forEach(item => {
-    let liItem = document.createElement('li');
+    const liItem = document.createElement('li');
     liItem.textContent = item;
     menuList.appendChild(liItem);
   })
@@ -88,7 +88,7 @@ function menuMaker(items) {
 }
 
 // GRAB HEADER DIV AND APPEND LIST
-let headerDiv = document.querySelector('div.header');
+const headerDiv = document.querySelector('div.header');
 
 headerDiv.appendChild(menuMaker(menuItems));
 
