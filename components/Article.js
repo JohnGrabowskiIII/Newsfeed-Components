@@ -86,6 +86,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Highly original text article',
+    date: 'TODAY',
+    firstParagraph: `A lot of deep intellectual musings on the topic of programming`,
+
+    secondParagraph: `A few further enlightening points on the topic of human-computer communication`,
+
+    thirdParagraph: `A conclusion: working with XaTuring`
   }
 ];
 
@@ -100,10 +109,10 @@ const data = [
 
     {three separate paragraph elements}
 
-    <span class="expandButton">+</span>
+    <spanBtn class="expandButton">+</spanBtn>
   </div>
 
-  Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
+  Step 2: Still inside `articleMaker`, add an event listener to the spanBtn.expandButton.
   This listener should toggle the class 'article-open' on div.article.
 
   Step 3: Don't forget to return something from your function!
@@ -114,3 +123,70 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+import anime from 'animejs/lib/anime.es';
+
+// FUNCTION TO BUILD TITLE ELEMENTS
+function titleBuilder(title) {
+  const hTwo = document.createElement('h2');
+  hTwo.textContent = title;
+  return hTwo;
+}
+
+// FUNCTION TO BUILD DATE ELEMENTS
+function dateBuilder(date) {
+  const pDate = document.createElement('p');
+  pDate.classList.add('date');
+  pDate.textContent = date;
+  return pDate;
+}
+
+// FUNCTION TO BUILD PARAGRAPH ELEMENTS
+function paragraphBuilder(para) {
+  const paragraph = document.createElement('p');
+  paragraph.textContent = para;
+  return paragraph;
+}
+
+// FUNCTION TO BUILD SPAN BUTTONS
+const spanExpand = () => {
+  const spanBtn = document.createElement('span');
+  
+  spanBtn.classList.add('expandButton');
+  spanBtn.textContent = '+';
+  spanBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    e.target.parentNode.classList.toggle('article-open');
+  })
+  return spanBtn;
+}
+
+function articleBuilder(articleObject) {
+
+  // DESTRUCTURE ARTICLE KEYS
+  const {title, date, firstParagraph, secondParagraph, thirdParagraph} = articleObject;
+
+  // DECLARE CONTAINER DIV AND ADD CLASS
+  const artContainerDiv = document.createElement('div');
+  artContainerDiv.classList.add('article');
+
+  // CALL BUILDER FUNCTIONS AND APPEND RESULTS
+  artContainerDiv.appendChild(titleBuilder(title));
+  artContainerDiv.appendChild(dateBuilder(date));
+  artContainerDiv.appendChild(paragraphBuilder(firstParagraph));
+  artContainerDiv.appendChild(paragraphBuilder(secondParagraph));
+  artContainerDiv.appendChild(paragraphBuilder(thirdParagraph));
+  artContainerDiv.appendChild(spanExpand())
+
+  return artContainerDiv;
+}
+
+// FUNCTION LOOPS THROUGH ARTICLE ARRAY AND CALLS ARTICLEBUILDER AT EACH ITERATION
+function articleMaker(articleArray) {
+  const articleSection = document.querySelector('div.articles');
+  articleArray.forEach(cb => {
+    articleSection.appendChild(articleBuilder(cb));
+  })
+}
+
+articleMaker(data);
